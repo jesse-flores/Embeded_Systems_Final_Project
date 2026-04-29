@@ -8,4 +8,4 @@ At the start of the program the ssd1309_basic_init(ssd1309_interface_t interface
 
 When we run the initialize function, we don't get any error messages which implies that it works; however, when we attempt to turn on the screen we don't see any changes.
    
-We then use the ssd1309_basic_display_on function, clear the screen and attempt to dispaly a rectangle but the display doesn't change. So we don't know if 
+We then use the ssd1309_basic_display_on function, clear the screen and attempt to dispaly a rectangle but the display doesn't change. So we don't know if the issue is coming from how our new i2c_write_reg function is working or if its a different issue.
