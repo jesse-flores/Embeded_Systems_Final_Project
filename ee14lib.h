@@ -5,7 +5,8 @@
 
 #include "stm32l432xx.h"
 #include <stdbool.h>
-
+#include "lcd.h"
+#include "spi.h"
 /** Pin names on the Nucleo silkscreen, copied from the Arduino Nano form factor.
  *  VCP_RX is hard-wired to the host bridge chip, not broken out to the headers.
  */
@@ -73,4 +74,7 @@ uint8_t i2c_init(void);
 uint8_t i2c_write_reg(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);
 bool i2c_write(I2C_TypeDef* i2c, unsigned char device_address, unsigned char* data, unsigned char len);
 bool i2c_read(I2C_TypeDef* i2c, unsigned char device_address, unsigned char* data, unsigned char len);
+EE14Lib_Err timer_config_pwm(TIM_TypeDef* const timer, const unsigned int freq_hz);
+EE14Lib_Err timer_config_channel_pwm(TIM_TypeDef* const timer, const EE14Lib_Pin pin, const unsigned int duty);
+
 #endif
