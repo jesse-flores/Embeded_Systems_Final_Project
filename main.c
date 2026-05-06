@@ -1,5 +1,7 @@
 #include "ee14lib.h"
-#include "driver_ssd1309_basic.h"               
+#include "fonts.h"
+#include "stdio.h"
+sFONT font;       
 
 #define I2C_ADDR 0x3c
 volatile uint32_t time_count = 0;
@@ -34,18 +36,92 @@ void SysTick_initialize(void) {
     SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
 }
 
+#include "lcd.h"
+static void draw_minus(uint16_t X, uint16_t Y, uint16_t color) {
+    for (uint16_t x = X;               x < X + SEG_LEN;       x++)
+    for (uint16_t y = Y;               y < Y + THICK;         y++)
+        draw_pixel(240-y, x, color);
+}
+
+void draw_score(int score) 
+{
+    if (score < 0) {
+        // printf("score is negative: %d\n", score);
+        draw_minus(65, 130, BLACK);
+        score = -score;
+    } 
+    if (score < 10){
+        draw_digit(score, 100, 100, BLACK);
+    }else {
+        uint8_t ones = score % 10;
+        uint8_t tens = score / 10;
+        draw_digit(tens, 100, 100, BLACK);
+        draw_digit(ones, 135, 100, BLACK);
+    }
+    
+}
 
 int main() 
 {
-        host_serial_init(9600);
-        SysTick_initialize();
-        delay_ms(3000);
-        ssd1309_basic_init(SSD1309_INTERFACE_IIC, SSD1309_ADDR_SA0_0);
-        uint8_t res = ssd1309_basic_display_on();
-        ssd1309_basic_clear();
-        delay_ms(5000);
-        res =  ssd1309_basic_rect(0, 0, 50, 40, 180);
-        printf("Result: %d\n", res);
-        ssd1309_basic_clear();
-        return 0;
+
+    host_serial_init(9600);
+    SysTick_initialize();
+
+    spi_init();
+    dev_init();
+    lcd_init();
+    gpio_config_mode(A5, INPUT);
+    gpio_config_pullup(A5, PULL_DOWN);
+    gpio_config_mode(A6, INPUT);
+    gpio_config_pullup(A6, PULL_DOWN);
+    gpio_config_mode(A3, INPUT);
+    gpio_config_pullup(A3, PULL_DOWN);
+    
+
+    // font = Font12;
+    
+    lcd_clear(WHITE);
+    set_backLight(1000);
+
+ 
+    int score = 0;
+    lcd_clear(WHITE);
+    draw_score(score);
+    delay_ms(500);
+    while(1) {
+
+        // printf("increase: %d\n", gpio_read(A6));
+        // printf("decrease: %d\n", gpio_read(A5));
+        // printf("reset: %d\n", gpio_read(A3));
+
+        if(gpio_read(A6) == 1) {
+            lcd_clear(WHITE);
+            draw_score(++score);
+        } else if (gpio_read(A5) == 1) {
+            lcd_clear(WHITE);
+            draw_score(--score);
+        } else if(gpio_read(A3) == 1) {
+            score = 0;
+            lcd_clear(WHITE);
+            draw_score(score);
+
+            // delay_ms(500);
+     }
+    //  printf("what?\n");
+        // delay_ms(100);
+
+        // for (int i = -20; i < 10; i++) {
+        //     lcd_clear(WHITE);
+        //     draw_score(i);
+            
+        // }
+    // }
+    
+    // lcd_clear(WHITE);
+    // char character = 'd';
+    // draw_char(300, 50, character, &Font12, WHITE, BLACK);
+
+    // printf("fonid\n");
+    }
+    return 0;
 }
