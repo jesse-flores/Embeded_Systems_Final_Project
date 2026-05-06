@@ -19,6 +19,9 @@ We then rely on our other STM32 board to activate the appropiate data line we're
 
 # Files and Structure
 
+## EE14 Code
+Files like our 'ee14lib.h', 'timer.c', 'uart.c', and 'gpio.c' are files used across either from our lab or homework portion of this course.<br>
+
 ## STM32_1_LCD
 driver_ssd1309.h/.c - Core driver code which handles sending instructions to the SSD1309 <br>
 driver_ssd1309_basic - a implementation of a driver which uses the driver_ssd1309 interface <br>
@@ -31,7 +34,17 @@ uart.c, gpio.c - provided lab functions <br>
 game.h/.c - Core game logic employing deep technical skills learnt across EE14 with finite state machines, struct and typedef datatypes. 
 <br>
 
+# How to Use
+0.5. If you are on Windows, install the ST-Link USB drivers as Administrator: https://www.st.com/en/development-tools/stsw-link009.html. You shouldn’t have to register for an account if you use the “Download as guest” option, but you will need to put in your email address to get the download link.
 
+1. Create an empty PlatformIO project with the same settings as last time:<br>
+• Name: Whatever you want, but hopefully something descriptive like whack-a-mole_EE14_Final_Project<br>
+• Board: ST Nucleo L432KC<br>
+• Framework: CMSIS<br>
+
+2. Repeat Step 1 for the other nucleo board.<br>
+
+3. Download the appropiate STM32 code for one of the boards and insert all '.c' code files into the 'src' folder and '.h' header files into the 'include' folder. You're ready to compile, build, and run your software once the wires initialized in the code have been setup properly.
 
 # Gameplay Demo
 ![Gameplay demo 1](/assets/Game_Play_1.gif)
