@@ -56,3 +56,6 @@ game.h/.c - Core game logic employing deep technical skills learnt across EE14 w
 ![Picture From Showcase - 3](/assets/Showcase_3.jpg)
 
 ![Picture From Showcase - 4](/assets/Showcase_4.jpg)
+
+# Team
+Dagbegnon Amouzou, Jesse Flores, Vicky Lin, Ekow Williams
