@@ -28,6 +28,7 @@ driver_ssd1309_basic - a implementation of a driver which uses the driver_ssd130
 iic.c - An implementation of the iic write and reading functions which are consistent with what the driver expects (used by us to create a similar i2c write function later in i2c.c) <br>
 i2c.c - i2c reading and writing functions (mostly written by Bell aside from the last function)<br>
 uart.c, gpio.c - provided lab functions <br>
+spi.h, spi.c - Spi interface provided by Cooper
 <br>
 
 ## STM32_2_GAME_LOGIC
