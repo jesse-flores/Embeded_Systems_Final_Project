@@ -77,4 +77,9 @@ bool i2c_read(I2C_TypeDef* i2c, unsigned char device_address, unsigned char* dat
 EE14Lib_Err timer_config_pwm(TIM_TypeDef* const timer, const unsigned int freq_hz);
 EE14Lib_Err timer_config_channel_pwm(TIM_TypeDef* const timer, const EE14Lib_Pin pin, const unsigned int duty);
 
+// Delays using TIM1
+void delay_timer_config();
+void delay_us(uint32_t us);
+void delay_ms(uint32_t ms);
+
 #endif
