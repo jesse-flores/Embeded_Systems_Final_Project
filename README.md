@@ -27,6 +27,9 @@ driver_ssd1309.h/.c - Core driver code which handles sending instructions to the
 driver_ssd1309_basic - a implementation of a driver which uses the driver_ssd1309 interface <br>
 iic.c - An implementation of the iic write and reading functions which are consistent with what the driver expects (used by us to create a similar i2c write function later in i2c.c) <br>
 i2c.c - i2c reading and writing functions (mostly written by Bell aside from the last function)<br>
+bang_i2c.c - Bit banged implementations of i2c writing functions that are consistent with what the driver expects <br>
+delay_timer.c - A module which provides delay functions using the timer peripherals <br>
+example_display.c - Example code which displays "IT WOORKSS!!" then draws a filled rectangle <br>
 uart.c, gpio.c - provided lab functions <br>
 spi.h, spi.c - Spi interface provided by Cooper
 <br>
