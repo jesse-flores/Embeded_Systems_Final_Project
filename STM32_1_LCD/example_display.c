@@ -15,8 +15,9 @@ int main()
     bang_i2c_init();
    uint8_t data[1] = {0};
    
-    //write garbage data so that we dont get error first write 
+    //write garbage data to display
     bang_i2c_write(I2C_ADDR, 0x00, data, 1);
+    
     res = ssd1306_basic_init(SSD1306_INTERFACE_IIC, SSD1306_ADDR_SA0_0);
     if (res != 0)
     {
